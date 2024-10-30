@@ -1,6 +1,6 @@
 <template>
     <div class="content">
-      <button class="shop-now">Shop Now →</button>
+      <!-- <button class="shop-now" :style="{ backgroundColor: bgColor }">Shop Now →</button> -->
     </div>
 </template>
 <script>

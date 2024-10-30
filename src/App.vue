@@ -26,16 +26,19 @@ export default {
           title: "Everyday Fresh & Clean with Our Products",
           image: "src/assets/o041.png",
           bgColor: "#f7f9ec",
-        },
+          buttonColor: "#34a853",
+        },  
         {
           title: "Make your Breakfast Healthy and Easy",
           image: "src/assets/m11.png",
           bgColor: "#fbeaec",
+          buttonColor: "#34a853",
         },
         {
           title: "The best Organic Products Online",
           image: "src/assets/v031.png",
           bgColor: "#e7f0fc",
+          buttonColor: "#f5cb0f",
         },
       ],
     };
@@ -50,7 +53,7 @@ export default {
         v-for="(category, index) in categories"
         :key="index"
         :title="category.title"
-        :items="category.items"
+        :items="category.items"     
         :image="category.image"
         :bgColor="category.bgColor"
       />
@@ -66,6 +69,7 @@ export default {
       />
     </div>
   </div>
+ 
 </template>
 <style>
 template{

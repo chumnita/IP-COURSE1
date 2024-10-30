@@ -2,12 +2,15 @@
     <div class="promo-banner" :style="{ backgroundColor: bgColor }">
       <div>
       <h2>{{ title }}</h2>
-      <cpn3/>
+      <button class="shopnowbutton"   @click="shopNow()">Shop Now →</button>
+      
+      <cpn3  :bgColor="buttonColor"/>
       </div>
       <img :src="image" alt="promo image" class="promo-image" >
     </div>
   </template>
-  
+  <!-- main wrapper for each promotional banner. -->
+
   <script>
   import cpn3 from './cpn3.vue';
   export default {
@@ -23,6 +26,14 @@
     components:{
       cpn3,
     },
+    methods: {
+        shopNow() {
+             alert("Let's shop: "+this.title);
+           
+        }
+
+    }
+
   };
   </script>
   
@@ -37,6 +48,17 @@
     height: 250px;
     width: 420px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  .shopnowbutton{
+    margin-top: 10px;
+  padding: 5px 10px;
+  background-color: #34a853;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;  
+  width: 100px;
+  height: 40px;
   }
   h2 {
     font-size:x-large;

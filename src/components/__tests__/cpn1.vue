@@ -4,6 +4,7 @@
       <h3>{{ title }}</h3>
       <p>{{ items }} items</p>
     </div>
+    <!-- category banner -->
   </template>
   <script>
   export default {
