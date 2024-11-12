@@ -1,13 +1,13 @@
 <template>
     <div class="content">
-      <!-- <button class="shop-now" :style="{ backgroundColor: bgColor }">Shop Now →</button> -->
+      <button class="shop-now" :style="{ backgroundColor: color }">Shop Now →</button>
     </div>
 </template>
 <script>
 export default {
     name:"shopbtn",
     props: {
-    bgColor: {
+    color: {
       type: String,
     },
   },
@@ -17,7 +17,7 @@ export default {
 .shop-now {
   margin-top: 10px;
   padding: 5px 10px;
-  background-color: #34a853;
+  background-color: #f5cb0f;
   color: white;
   border: none;
   border-radius: 5px;

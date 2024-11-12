@@ -1,10 +1,10 @@
 <template>
-    <div class="promo-banner" :style="{ backgroundColor: bgColor }">
+    <div class="promo-banner" :style="{ backgroundColor: color }">
       <div>
       <h2>{{ title }}</h2>
-      <button class="shopnowbutton"   @click="shopNow()">Shop Now →</button>
+      <!-- <button  :bgColor="buttonColor">Shop Now →</button> -->
       
-      <cpn3  :bgColor="buttonColor"/>
+      <cpn3 @click="shopNow()" :color="buttonColor"/>
       </div>
       <img :src="image" alt="promo image" class="promo-image" >
     </div>
@@ -18,7 +18,7 @@
     props: {
       title: String,
       image: String,
-      bgColor: String,
+      color: String,
       buttonColor: { 
       type: String,
     }
@@ -49,7 +49,7 @@
     width: 420px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
-  .shopnowbutton{
+  /* .shopnowbutton{
     margin-top: 10px;
   padding: 5px 10px;
   background-color: #34a853;
@@ -59,13 +59,14 @@
   cursor: pointer;  
   width: 100px;
   height: 40px;
-  }
+  } */
   h2 {
     font-size:x-large;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif, Arial, sans-serif;
     color: rgb(46, 43, 65);
   }
   .promo-image {
+    margin-top: 50px;
     width: 150px;
     height: auto;
   }
