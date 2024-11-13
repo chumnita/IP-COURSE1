@@ -16,6 +16,7 @@
       color: String,
     },
   };
+ 
   </script>
   <style>                                      
   .category-card {
