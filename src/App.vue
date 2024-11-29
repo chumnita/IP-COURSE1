@@ -41,10 +41,10 @@ export default {
 
     // Fetch data on component mount
     onMounted(() => {
-      productStore.fetchGroups();
-      productStore.fetchPromotions();
-      productStore.fetchCategories();
-      productStore.fetchProducts();
+      productStore.loadGroups();
+      productStore.loadCategories();
+      productStore.loadProducts();
+      productStore.loadPromotions();
     });
 
     return {
@@ -66,8 +66,8 @@ export default {
     <div class="menuCategorybar">
       <div>Featured Categories</div>
       <Menu 
-        :menuItems="categoryGroups" 
-        @menu-selected="(group) => (selectedCategoryGroup.value = group)" 
+        :items="categoryGroups" 
+        @selection-changed="(group) => (selectedCategoryGroup = group)" 
       />
     </div>
 
@@ -98,8 +98,8 @@ export default {
     <div class="menuProductbar">
       <div>Popular Products</div>
       <Menu 
-        :menuItems="productGroups" 
-        @menu-selected="(group) => (selectedProductGroup.value = group)" 
+        :items="productGroups" 
+        @selection-changed="(group) => (selectedProductGroup = group)" 
       />
     </div>
 
@@ -131,7 +131,7 @@ export default {
   gap: 20px;
   left: 11%;
   right: 10%;
-  top: 15%;
+  top: 5%;
 }
 .category-row,
 .promo-row {
@@ -142,7 +142,8 @@ export default {
 }
 .product-row {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  width: 100%;
+  grid-template-columns: auto auto auto auto auto;
   gap: 15px;
 }
 .menuCategorybar, .menuProductbar {

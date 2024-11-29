@@ -16,11 +16,11 @@
     name: "ProductCard",
     props: {
       name: String,
-      rating: String,
+      rating: Number,
       size: String,
       image: String,
-      price: String,
-      promotionPercentage: String,
+      price: Number,
+      promotionPercentage: Number,
       categoryId: Number,
       instock: Number,
       countSold: Number,
@@ -29,65 +29,120 @@
   };
   </script>
   
-  <style>
+
+ <style scoped>
   .product-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-    justify-content: space-around;
-    padding: 10px;
-    background-color: #f9f9f9;
-  }
-  
-  .product-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 15px;
-    background: #fff;
-    width: 220px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s, box-shadow 0.2s;
-  }
-  
-  .product-card:hover {
-    transform: scale(1.05);
-    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
-  }
-  
-  .product-thumbnail {
-    width: 85%;
-    height: auto;
-    margin-bottom: 10px;
-    border-radius: 5px;
-  }
-  
-  .product-title {
-    font-size: 1.2rem;
-    font-weight: 600;
-    text-align: center;
-    margin: 8px 0;
-  }
-  
-  .product-rating {
-    color: #ff9900;
-    font-size: 0.9rem;
-    margin: 5px 0;
-  }
-  
-  .product-dimensions,
-  .product-cost,
-  .product-stock {
-    font-size: 0.9rem;
-    color: #333;
-    margin: 3px 0;
-  }
-  
-  .product-cost {
-    color: #008000;
-    font-weight: bold;
-  }
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Adjust the card width */
+  gap: 20px;
+}
+.product-container .product-card{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  text-align: center;
+  width: 100%;
+  height: 50vh; 
+
+}
+
+.product:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.product-thumnail {
+  width: 100px; 
+  height: 100px;
+  object-fit: cover;
+  margin-bottom: 10px;
+
+}
+.product-card h3 {
+  font-size: 1rem;
+  font-weight: bold;
+  margin: 5px 0;
+  color: #333;
+}
+
+.product-card p {
+  font-size: 0.9rem;
+  color: #555;
+  margin: 2px 0;
+}
+
+.product-card span {
+  font-size: 0.9rem;
+  color: #000;
+  font-weight: bold;
+}
+
+
+.product-name {
+  font-weight: bold;
+  font-size: 1.1rem;
+  margin: 5px 0;
+}
+
+.product-size,
+.product-rating {
+  font-size: 0.9rem;
+  margin: 5px 0;
+}
+
+.price-section {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.product-card .price {
+  margin-top: 10px;
+  font-size: 1rem;
+  color: #4caf50;
+  font-weight: bold;
+}
+/* 
+.old-price {
+  text-decoration: line-through;
+  color: gray;
+  font-size: 0.9rem;
+} */
+
+/* .promotion-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: green;
+  color: white;
+  font-size: 0.8rem;
+  padding: 3px 8px;
+  border-radius: 5px;
+} */
+
+.add-button {
+  margin-top: 10px;
+  padding: 8px 16px;
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  color: #333;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.add-button:hover {
+  background-color: #e0e0e0;
+  color: black;
+}
   </style>
+ 
   

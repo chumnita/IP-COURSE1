@@ -1,8 +1,8 @@
 <template>
-  <div class="category-container" :style="{ backgroundColor: bgColor }">
+  <div class="category-container" :style="{ backgroundColor: color }">
     <img :src="image" alt="Category Image" class="category-thumbnail" />
     <h3 class="category-title">{{ name }}</h3>
-    <p class="category-items">{{ productCount }} Items Available</p>
+    <p class="category-items">{{ productCount }} Items</p>
   </div>
 </template>
 
@@ -13,12 +13,12 @@ export default {
     name: String,
     productCount: Number,
     image: String,
-    bgColor: String,
+    color: String, 
   },
 };
 </script>
 
-<style scoped>
+<style>
 .category-container {
   display: grid;
   place-items: center;
@@ -27,6 +27,8 @@ export default {
   border-radius: 12px;
   width: 130px;
   text-align: center;
+  flex-direction: column;
+  align-items: center;
   border: 1px solid #ddd;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   transition: transform 0.2s, box-shadow 0.2s;

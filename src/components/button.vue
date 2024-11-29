@@ -1,46 +1,29 @@
 <template>
-  <div class="btn-container">
-    <button 
-      class="shop-btn" 
-      :style="{ backgroundColor: btnColor }">Shop Now →</button>
-  </div>
+  <button class="shop-btn">Shop Now →</button>
 </template>
 
 <script>
 export default {
-  name: "ShopButton",
-  props: {
-    btnColor: {
-      type: String,
-    },
-  },
+  name: 'ShopButton',
 };
 </script>
 
 <style scoped>
 .shop-btn {
-  margin: 15px auto;
-  padding: 10px 20px;
+  margin-top: 10px;
+  padding: 5px 10px;
   background-color: #4caf50;
-  color: #fff;
-  font-weight: bold;
-  border: 2px solid #4caf50;
-  border-radius: 8px;
+  color: white;
+  border: none;
+  border-radius: 5px;
   cursor: pointer;
-  transition: all 0.3s ease;
-  width: 120px;
-  height: 45px;
+  width: 100px;
+  height: 40px;
 }
 
-.shop-btn:hover {
-  background-color: #45a049;
-  border-color: #388e3c;
-  color: #e8f5e9;
-}
-
-.btn-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+/* Style for specific buttons */
+.shop-btn:nth-child(3) {
+  background-color: #f5cb0f;
+  color: #000; /* Adjust for readability */
 }
 </style>

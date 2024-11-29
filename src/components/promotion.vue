@@ -1,8 +1,8 @@
 <template>
-  <div class="promotion-container" :style="{ backgroundColor: bgColor }">
+  <div class="promotion-container" :style="{ backgroundColor: Color }">
     <div class="promotion-details">
-      <h2 class="promotion-title">{{ title }}</h2>
-      <MyButton @click="shopNow" :bgColor="buttonColor" />
+      <h2>{{ title }}</h2>
+      <MyButton @click="shopNow()"  class="shop-now-button" :style="{backgroundColor :buttonColor}"/>
     </div>
     <img :src="image" alt="Promotion Image" class="promotion-image" />
   </div>
@@ -16,7 +16,7 @@ export default {
   props: {
     title: String,
     image: String,
-    bgColor: String,
+    color: String,
     buttonColor: {
       type: String,
     },
@@ -33,18 +33,16 @@ export default {
 </script>
 
 <style scoped>
+
 .promotion-container {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: 15px;
-  align-items: center;
   padding: 20px;
-  border-radius: 12px;
-  color: #444;
-  height: auto;
-  max-width: 450px;
-  box-shadow: 0 5px 8px rgba(0, 0, 0, 0.15);
-  transition: transform 0.3s;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  color: #333;
+  height: 220px;
+  width: 465px;
 }
 
 .promotion-container:hover {
@@ -58,17 +56,30 @@ export default {
   gap: 10px;
 }
 
-.promotion-title {
-  font-size: 1.5rem;
-  font-family: 'Roboto', sans-serif;
-  color: #2c2a47;
+h2 {
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  color: black;
+  margin-bottom: 16px;
 }
-
 .promotion-image {
-  width: 140px;
-  height: auto;
-  object-fit: cover;
-  border-radius: 8px;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+  width: 220px;
+  height: 180px;
+  object-fit: contain;
+  margin-top: 50px; 
+  margin-right: -20px;
+}
+ .promotion-details MyButton{
+  background-color: #f5cb0f;
+
+}
+.shop-now-button {
+  background-color: green; 
+  color: #fff; 
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  font-size: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 </style>
