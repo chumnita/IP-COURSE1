@@ -35,6 +35,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Adjust the card width */
   gap: 20px;
+  /* background-color: red; */
 }
 .product-container .product-card{
   display: flex;
@@ -51,6 +52,11 @@
   height: 50vh; 
 
 }
+.product-container .product-card img{
+  width: 100%;
+  height: 200px;
+
+}
 
 .product:hover {
   transform: translateY(-5px);
@@ -65,6 +71,9 @@
 
 }
 .product-card h3 {
+  /* width: 100%;
+  height: 100px; */
+  /* background-color: rebeccapurple; */
   font-size: 1rem;
   font-weight: bold;
   margin: 5px 0;
@@ -127,22 +136,9 @@
   border-radius: 5px;
 } */
 
-.add-button {
-  margin-top: 10px;
-  padding: 8px 16px;
-  background-color: #f5f5f5;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  color: #333;
-  font-size: 0.9rem;
-  cursor: pointer;
-  transition: background-color 0.3s, color 0.3s;
-}
 
-.add-button:hover {
-  background-color: #e0e0e0;
-  color: black;
-}
+
+
   </style>
  
   
