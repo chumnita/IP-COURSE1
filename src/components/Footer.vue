@@ -1,26 +1,19 @@
 <template>
-    <footer>
-      <button>Footer</button>
-    </footer>
-  </template>
-  
-  <script>
-  export default {
-    name: "Footer",
-  };
-  </script>
-  
-  <style>
-  footer {
-    background: #f8f9fa;
-    text-align: center;
-    height: 50px;
-    padding: 10px;
-    margin-top: 20px;
-  }
-  
-  button {
-    border: none;
-  }
-  </style>
-  
+  <footer class="footer">Footer</footer>
+</template>
+
+<script>
+export default {
+  name: "Footer",
+};
+</script>
+
+<style scoped>
+.footer {
+  background-color: #f1f1f1;
+  padding: 10px;
+  text-align: center;
+  border-top: 1px solid #ccc;
+  font-size: 18px;
+}
+</style>

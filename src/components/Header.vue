@@ -1,31 +1,49 @@
 <template>
-    <header>
-      <nav>
-        <router-link to="/page1">Page 1</router-link>
-        <router-link to="/page2">Page 2</router-link>
-        <router-link to="/page3">Page 3</router-link>
-      </nav>
-    </header>
-  </template>
-  
-  <script>
-  export default {
-    name: "Header",
-  };
-  </script>
-  
-  <style>
-  header {
-    background: #f8f9fa;
-    padding: 10px;
-    text-align: center;
-    /* background-color: red; */
-  }
-  
-  nav a {
-    margin: 0 10px;
-    text-decoration: none;
-    color: red;
-  }
-  </style>
-  
+  <header class="header">
+    <div class="header-left">
+      <span>Header</span>
+    </div>
+    <nav>
+      <a
+        v-for="(page, index) in pages"
+        :key="index"
+        href="#"
+        @click.prevent="$emit('page-selected', page)"
+        :class="{ active: currentPage === page }"
+      >
+        {{ page }}
+      </a>
+    </nav>
+  </header>
+</template>
+
+<script>
+export default {
+  name: "Header",
+  props: {
+    pages: Array,
+    currentPage: String,
+  },
+};
+</script>
+
+<style scoped>
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f1f1f1;
+  padding: 10px 20px;
+  font-size: 20px;
+  border-bottom: 1px solid #ccc;
+}
+.header nav a {
+  margin-left: 20px;
+  text-decoration: none;
+  color: black;
+}
+.header nav a.active {
+  color: red;
+  font-weight: bold;
+}
+</style>
