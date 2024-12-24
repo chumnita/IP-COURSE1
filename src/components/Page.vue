@@ -1,37 +1,73 @@
 <template>
-    <div class="content">
-      <p>{{ Pagecaption }}</p>
-      <hr class="separator" />
-      <p v-if="sectionCaption">{{ sectionCaption }}</p>
+  <div class="content">
+    <h1>{{ pageCaption }}</h1>
+    <h2 v-if="sectionCaption">{{ sectionCaption }}</h2>
+    <div v-if="section && section === 'Section 1'">
+      <p>This is Section 1 of {{ currentPage }}</p>
+      <p>Message: 123</p>
     </div>
-  </template>
+    <div v-if="section !== 'Section 1' && previousMessages.length > 0">
+      <ul>
+        <li v-for="(message, index) in previousMessages" :key="index">
+          Message from {{ previousPages[index] }}: {{ message }}
+        </li>
+      </ul>
+    </div>
+    <div>
+      <div v-if="!section || section !== 'Section 1'">
+        <label for="message">Message:</label>
+      <input id="message" v-model="currentMessage" @input="updateMessage" />
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  props: ["currentPage", "messages", "section"],
+  data() {
+    return {
+      currentMessage: this.messages[this.currentPage] || "",
+    };
+  },
+  computed: {
   
-  <script>
-  export default {
-    name: "Pagecaption",
-    props: {
-      Pagecaption: String,
-      sectionCaption: String,
+    previousPages() {
+      const pageIndex = Object.keys(this.messages).indexOf(this.currentPage);
+      return Object.keys(this.messages).slice(0, pageIndex);
     },
-  };
-  </script>
-  
-  <style scoped>
-  .content {
-    flex: 1;
-    padding: 20px;
-    text-align: center;
-    font-size: 30px;
-    color: black;
-  }
-  .separator {
-  margin: 15px 0;
-  border: none;
-  border-top: 2px solid #0f0f0f;
-  width: 80%; /* You can adjust the width as needed */
-  margin-left: auto;
-  margin-right: auto;
-  /* color: black; */
+    previousMessages() {
+      const pageIndex = Object.keys(this.messages).indexOf(this.currentPage);
+      return Object.values(this.messages).slice(0, pageIndex);
+    },
+  },
+  methods: {
+    updateMessage() {
+      this.$emit("update-messages", this.currentPage, this.currentMessage);
+    },
+  },
+};
+</script>
+
+<style scoped>
+.content {
+  text-align: center;
+  margin-top: 20px;
 }
-  </style>
-  
+h1,
+h2 {
+  margin: 10px 0;
+}
+li {
+  list-style: none;
+  margin-bottom: 10px;
+}
+h1 {
+  font-size: 24px;
+  color: black;
+}
+h2 {
+  font-size: 18px;
+  color: black;
+}
+</style>

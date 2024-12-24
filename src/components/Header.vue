@@ -1,48 +1,50 @@
 <template>
-  <header class="header">
-    <div class="header-left">
-      <span>Header</span>
-    </div>
+  <div class="header">
     <nav>
-      <a
-        v-for="(page, index) in pages"
-        :key="index"
-        href="#"
-        @click.prevent="$emit('page-selected', page)"
-        :class="{ active: currentPage === page }"
+      <span id="header">Header</span>
+      <span
+        v-for="page in pages"
+        :key="page"
+        :class="{ active: page === currentPage }"
+        @click="selectPage(page)"
       >
         {{ page }}
-      </a>
+      </span>
     </nav>
-  </header>
+  </div>
 </template>
 
 <script>
 export default {
-  name: "Header",
-  props: {
-    pages: Array,
-    currentPage: String,
+  props: ["pages", "currentPage"],
+  methods: {
+    selectPage(page) {
+      this.$emit("page-selected", page);
+    },
   },
 };
 </script>
 
 <style scoped>
 .header {
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #f1f1f1;
-  padding: 10px 20px;
-  font-size: 20px;
+  padding: 10px;
   border-bottom: 1px solid #ccc;
 }
-.header nav a {
-  margin-left: 20px;
-  text-decoration: none;
-  color: black;
+#header {
+  width: 550px;
 }
-.header nav a.active {
+nav {
+  display: flex;
+  gap: 15px;
+}
+nav span {
+  cursor: pointer;
+}
+nav span.active {
   color: red;
   font-weight: bold;
 }

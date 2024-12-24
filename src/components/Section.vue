@@ -1,53 +1,53 @@
 <template>
-    <aside class="sidebar">
-      <div class="menu-label">Menu</div>
-      <ul>
-        <li
-          v-for="(section, index) in sections"
-          :key="index"
-          @click="$emit('section-selected', section)"
-        >
-          {{ section }}
-        </li>
-      </ul>
-    </aside>
-  </template>
-  
-  <script>
-  export default {
-    name: "Section",
-    props: {
-      sections: Array,
-    },
-  };
-  </script>
-  
-  <style scoped>
-  .sidebar {
-    width: 25%;
-    background-color: #f8f8f8;
-    border-right: 1px solid #ccc;
-    padding: 10px;
-  }
-  .menu-label {
-    text-align: center;
-    font-size: 20px;
-    margin-bottom: 10px;
-  }
-  .sidebar ul {
-    list-style: none;
-    padding: 0;
-  }
-  .sidebar li {
-    padding: 10px;
-    border: 1px solid #ccc;
-    margin: 5px 0;
-    text-align: center;
-    cursor: pointer;
-  }
-  .sidebar li:hover{
-   background-color: rgba(135, 207, 235, 0.699);
+  <div class="sidebar">
+    <ul>
+      <li
+        v-for="section in sections"
+        :key="section"
+        @click="onSectionClick(section)"
+        :class="{ active: section === currentSection }"
+      >
+        {{ section }}
+      </li>
+    </ul>
+  </div>
+</template>
 
-  }
-  </style>
-  
+<script>
+export default {
+  props: ["sections", "currentSection"],
+  methods: {
+    onSectionClick(section) {
+      // Emit the selected section and update the route
+      this.$emit("section-selected", section);
+    },
+  },
+};
+</script>
+
+<style scoped>
+.sidebar {
+  width: 200px;
+  border-right: 1px solid #ccc;
+  padding: 10px;
+  margin-right: 50px;
+}
+ul {
+  list-style: none; /* Remove list style */
+  padding: 0;
+  margin: 0;
+}
+li {
+  padding: 10px 0;
+  cursor: pointer;
+  border-bottom: 1px solid #eee; /* Add section line */
+  transition: background-color 0.2s;
+}
+li.active {
+  font-weight: bold;
+  color: blue;
+}
+li:hover {
+  background-color: #aedaec;
+}
+</style>

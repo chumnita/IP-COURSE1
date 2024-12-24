@@ -16,4 +16,4 @@ export default {
   border-top: 1px solid #ccc;
   font-size: 18px;
 }
-</style>
+</style> 

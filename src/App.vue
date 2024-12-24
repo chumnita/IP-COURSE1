@@ -16,14 +16,16 @@
       />
 
       <!-- Content Area -->
-      <Page 
-      :Pagecaption="pageCaption"
-      :sectionCaption="sectionCaption"
-       />
+      <router-view
+        :messages="messages"
+        :currentPage="currentPage"
+        :section="currentSection"
+        @update-messages="updateMessages"
+      />
     </div>
 
     <!-- Footer -->
-    <Footer/>
+    <Footer />
   </div>
 </template>
 
@@ -31,38 +33,39 @@
 import Header from "./components/Header.vue";
 import Footer from "./components/Footer.vue";
 import Section from "./components/Section.vue";
-import Page from "./components/Page.vue";
+
 export default {
   name: "App",
   components: {
     Header,
     Footer,
     Section,
-    Page,
   },
   data() {
     return {
       pages: ["Page 1", "Page 2", "Page 3"],
       sections: ["Section 1", "Section 2", "Section 3", "Section 4"],
       currentPage: "Page 1",
-      currentSection: "Section 1",
+      currentSection: null,
+      messages: {
+        "Page 1": "hello",
+        "Page 2": "",
+        "Page 3": "",
+      },
     };
-  },
-  computed: {
-    pageCaption() {
-      return `Welcome to ${this.currentPage}`;
-    },
-    sectionCaption() {
-      return `This is ${this.currentSection} of ${this.currentPage}`;
-    },
   },
   methods: {
     handlePageChange(page) {
       this.currentPage = page;
-      // this.currentSection = "";
+      this.currentSection = null; // Reset section when changing the page
+      this.$router.push(`/page/${page}`);
     },
     handleSectionClick(section) {
       this.currentSection = section;
+      this.$router.push(`/page/${this.currentPage}/section/${section}`);
+    },
+    updateMessages(page, message) {
+      this.messages[page] = message;
     },
   },
 };
@@ -70,6 +73,7 @@ export default {
 
 <style scoped>
 .container {
+  height: 400px;
   display: flex;
   flex-direction: column;
   width: 800px;
