@@ -1,7 +1,7 @@
 services:
   app:
     build: .
-    container_name: app
+    container_name: app1
     working_dir: /var/www
     volumes:
       - ./laravel:/var/www
@@ -10,7 +10,7 @@ services:
       - laravel
   webserver:
     image: nginx:latest
-    container_name: nginx_server1
+    container_name: nginx_server2
     ports:
       - "8100:80"
     volumes:
@@ -33,3 +33,4 @@ services:
 networks:
   laravel:
     driver: bridge
+

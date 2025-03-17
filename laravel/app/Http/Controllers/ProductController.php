@@ -2,116 +2,87 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Product;
 use Illuminate\Http\Request;
-use Illuminate\Database\Eloquent\Collection;
+use App\Models\Product;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
-    public function index(){
-        $products = Product::all();
-        if ($products->isEmpty()) {
-            return response()->json(["message" => "No products found"]);
-        }
-        return response()->json(["data" => $products]);
+   /**
+     * Display a listing of the resource.
+     */
+    public function getProducts()
+    {
+        $products = Product::with('category')->get();
+        return response()->json($products);
     }
 
-    public function store(Request $request){
-        $product = Product::create($request->only(['name', 'price', 'category_id']));
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function newProduct(Request $request)
+    {
+        $imagePaths = [];
+    if ($request->hasFile('images')) {
+        foreach ($request->file('images') as $image) {
+            // Store each image in the public/products directory
+            $path = $image->store('products', 'public');
+            $imagePaths[] = $path; // Store the file path in an array
+        }
+    }
+
+        $product = Product::create([
+            'name' => $request->name,
+            'category_id' => $request->category_id,
+            'pricing' => $request->pricing,
+            'description' => $request->description,
+            'images' => $imagePaths
+        ]);
+
+
+        if(!$product){
+            return response()->json(['message' => 'Error creating product'], 400);
+        }
+
+        return response()->json(['message' => 'Creating a new product', 'product' => $product], 201);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function getProduct( $productId)
+    {
+        $product = Product::with('category')->find($productId);
+
+        return response()->json($product);
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function updateProduct(Request $request, $productId)
+    {
+        $product = Product::find($productId);
+
+        $product->update($request->all());
+
         return response()->json([
-            "message" => "Product created successfully",
-            "data" => $product
+            'message' => 'Product updated successfully',
+            'product' => $product->fresh()
         ]);
     }
 
-    public function show($id){
-        $product = Product::find($id);
-        if (!$product) {
-            return response()->json(["message" => "Product not found"], 404);
-        }
-        return response()->json(["data" => $product]);
-    }
+    public function deleteProduct( $productId)
+    {
+        $product = Product::find($productId);
 
-    public function update(Request $request, $id){
-        $product = Product::find($id);
-        if (!$product) {
-            return response()->json(["message" => "Product not found"], 404);
-        }
-        $product->update($request->only(['name', 'price', 'category_id']));
-        return response()->json([
-            "message" => "Product updated successfully",
-            "data" => $product
-        ]);
-    }
-
-    public function destroy($id){
-        $product = Product::find($id);
-        if (!$product) {
-            return response()->json(["message" => "Product not found"], 404);
-        }
-        $product->delete();
-        return response()->json(["message" => "Product deleted successfully"]);
-    }
-
-    public function getActiveProducts(){
-        $products = Product::where('active', 1)
-                            ->orderBy('name')
-                            ->take(10)
-                            ->get();
-        return response()->json(["data" => $products]);
-    }
-
-    public function refreshProduct($id){
-        $product = Product::find($id);
-        if (!$product) {
-            return response()->json(["message" => "Product not found"], 404);
-        }
-        $freshProduct = $product->fresh();
-        return response()->json([
-            "message" => "Product refreshed successfully",
-            "data" => $freshProduct
-        ]);
-    }
-
-    public function processProductsInChunks(){
-        Product::chunk(200, function (Collection $products) {
-            foreach ($products as $product) {
-                // Perform operations on each product
+        if ($product->images) {
+            foreach ($product->images as $image) {
+                Storage::disk('public')->delete($image);
             }
-        });
-        return response()->json(["message" => "Products processed in chunks"]);
-    }
-
-    public function findOrFailProduct($id){
-        try {
-            $product = Product::findOrFail($id);
-            return response()->json(["data" => $product]);
-        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
-            return response()->json(["message" => "Product not found"], 404);
         }
-    }
 
-    public function findOrCreateProduct(Request $request){
-        $product = Product::firstOrCreate(['name' => $request->name]);
-        return response()->json([
-            "message" => "Product retrieved or created successfully",
-            "data" => $product
-        ]);
-    }
-
-    public function updateOrCreateProduct(Request $request){
-        $product = Product::updateOrCreate(
-            ['name' => $request->name, 'category_id' => $request->category_id],
-            ['price' => $request->price, 'discounted' => $request->discounted]
-        );
-        return response()->json([
-            "message" => "Product updated or created successfully",
-            "data" => $product
-        ]);
-    }
-
-    public function truncateProducts(){
-        Product::truncate();
-        return response()->json(["message" => "Products table truncated successfully"]);
+        $product->delete();
+        return response()->json(['message' => 'Product deleted successfully']);
     }
 }
