@@ -13,7 +13,17 @@ return new class extends Migration
     {
         Schema::create('cart', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('customer_id');
+            $table->unsignedBigInteger('product_id');
+            $table->integer('quantity');   
             $table->timestamps();
+            $table->softDeletes();
+        
+            // Define foreign keys manually
+            $table->foreign('customer_id')->references('id')->on('customer')->onDelete('cascade');
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
+    
+
         });
     }
 

@@ -4,35 +4,32 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Customer extends Model
 {
     use SoftDeletes;
-    use HasFactory;
 
     protected $table = 'customer';
     protected $fillable = ['name', 'email', 'phone'];
 
-    public function carts()
+    public function cart()
     {
         return $this->hasMany(Cart::class); // A customer can have many carts
     }
 
-    public function wishlists()
+    public function wishlist()
     {
         return $this->hasMany(Wishlist::class); // A customer can have many wishlists
     }
 
-    public function orders()
+    public function order()
     {
         return $this->hasMany(Order::class); // A customer can have many orders
     }
 
-    public function payments()
+    public function payment()
     {
         return $this->hasMany(Payment::class); // A customer can have many payments
     }
-    protected $dates = ['deleted_at'];
-
 }
