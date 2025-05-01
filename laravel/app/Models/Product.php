@@ -9,15 +9,19 @@ class Product extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'price', 'description', 'category_id']; // Include category_id for the relationship
+    protected $fillable = ['name', 'pricing', 'description', 'category_id', 'images'];
+
+    protected $casts = [
+        'images' => 'array' // Cast images JSON column to array automatically
+    ];
 
     public function category()
     {
-        return $this->belongsTo(Category::class); // A product belongs to one category
+        return $this->belongsTo(Category::class);
     }
 
     public function orders()
     {
-        return $this->belongsToMany(Order::class, 'order_product'); // Many orders can have this product
+        return $this->belongsToMany(Order::class, 'order_product');
     }
 }

@@ -72,5 +72,5 @@ class CategoryController extends Controller
     public function truncateCategories(){
         Category::truncate();
         return response()->json(["message" => "Categories table truncated successfully"]);
-    }
+    } 
 }
