@@ -30,7 +30,6 @@ class CategoryTest extends TestCase
             'name' => 'Test Category'
         ]);
 
-        // ✅ Changed from 201 to 200 to match controller behavior
         $response->assertStatus(200)
                  ->assertJsonFragment(['message' => 'Category created successfully'])
                  ->assertJsonPath('data.name', 'Test Category');
