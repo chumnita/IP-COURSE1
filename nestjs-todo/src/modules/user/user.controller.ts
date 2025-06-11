@@ -1,38 +1,41 @@
 import {
+  Body,
+  Controller,
+  Delete,
   Get,
   Param,
-  Controller,
-  Post,
-  Body,
   Patch,
-  Delete,
+  Post,
+  UsePipes,
+  ValidationPipe,
 } from '@nestjs/common';
 import { UserService } from './user.service';
+import { CreateUserDto } from './dto/create-user.dto';
 
 @Controller('users')
-export class UsersController {
+export class UserController {
   constructor(private readonly userService: UserService) {}
 
-  @Get('/:username')
+  @Post()
+  @UsePipes(new ValidationPipe({ whitelist: true }))
+  create(@Body() createUserDto: CreateUserDto) {
+    return this.userService.createUser(createUserDto);
+  }
+
+  @Get(':username')
   getUser(@Param('username') username: string) {
     return this.userService.getUser(username);
   }
 
-  @Post('/users')
-  createUser(
-    @Body() body: { username: string; email: string; password: string },
-  ) {
-    return this.userService.createUser(body);
-  }
-
-  @Patch('/users/:username')
+  @Patch(':username')
   updateUser(
-    @Body() body: { username: string; email: string; password: string },
+    @Param('username') username: string,
+    @Body() updatedData: Partial<CreateUserDto>
   ) {
-    return this.userService.updateUser(body);
+    return this.userService.updateUser(username, updatedData);
   }
 
-  @Delete('/users/:username')
+  @Delete(':username')
   deleteUser(@Param('username') username: string) {
     return this.userService.deleteUser(username);
   }

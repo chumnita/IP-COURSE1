@@ -1,5 +1,4 @@
-import { IsNotEmpty, IsOptional, IsString, IsInt } from 'class-validator';
-//validate request body data before it reaches service.
+import { IsNotEmpty, IsOptional, IsString, IsInt } from 'class-validator'
 
 export class CreateTaskDto {
   @IsNotEmpty()
