@@ -2,7 +2,8 @@
 import { reactive } from 'vue'
 import axios from 'axios'
 
-const API_BASE = 'http://localhost:3100'  // ✅ point to NestJS, not json-server
+const API_BASE = 'http://localhost:3100'  
+// ✅ this is point to NestJS, not json-server
 
 export const todoStore = reactive({
   todos: [],
