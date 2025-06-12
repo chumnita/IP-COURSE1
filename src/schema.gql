@@ -1,0 +1,67 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Hotel {
+  id: Int!
+  name: String!
+  address: String!
+  phone: String!
+}
+
+type Booking {
+  id: Int!
+  start_date: String!
+  end_date: String!
+  hotel_id: Int!
+  is_checked_in: Boolean!
+  price: Float!
+}
+
+type Query {
+  hotels: [Hotel!]!
+  hotel(id: Int!): Hotel!
+  bookings: [Booking!]!
+  booking(id: Int!): Booking!
+  getBookingsByDate(start: String!, end: String!): [Booking!]!
+}
+
+type Mutation {
+  createHotel(createHotelInput: CreateHotelInput!): Hotel!
+  updateHotel(updateHotelInput: UpdateHotelInput!): Hotel!
+  removeHotel(id: Int!): Boolean!
+  bookHotel(createBookingInput: CreateBookingInput!): Booking!
+  updateBooking(updateBookingInput: UpdateBookingInput!): Booking!
+  cancelBooking(id: Int!): Boolean!
+  checkIn(id: Int!): Booking!
+}
+
+input CreateHotelInput {
+  name: String!
+  address: String!
+  phone: String!
+}
+
+input UpdateHotelInput {
+  name: String
+  address: String
+  phone: String
+  id: Int!
+}
+
+input CreateBookingInput {
+  start_date: String!
+  end_date: String!
+  hotel_id: Int!
+  is_checked_in: Boolean!
+  price: Float!
+}
+
+input UpdateBookingInput {
+  start_date: String
+  end_date: String
+  hotel_id: Int
+  is_checked_in: Boolean
+  price: Float
+  id: Int!
+}
